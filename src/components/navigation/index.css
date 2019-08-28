@@ -1,0 +1,10 @@
+nav.topNav ul{
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .topNav{
+    height: 40px;
+    border-bottom: solid #353535;
+  }
