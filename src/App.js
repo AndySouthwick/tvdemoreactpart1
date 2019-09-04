@@ -9,8 +9,6 @@ function App() {
     <Router>
     <div className="App">
       <div className="content-container">
-
-      
       <Navigation/>
       <Route exact path="/" component={ManagePage} />
       <Route path="/preview-page" component={PreviewPage} />

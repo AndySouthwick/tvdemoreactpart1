@@ -12,16 +12,18 @@ class SideNav extends Component{
     }
 
     render(){
+        console.log(this.props.show)
         return(
             <div className="side-nav">
                 <div>
                 
-                <h3>{this.deleteButton()}{this.props.title}</h3>
+                <h3>{this.deleteButton()}</h3>
 
                 </div>
                 
-                <p>{this.props.rating}</p>
-                <button onClick={this.clicked}>
+                <p>{this.props.show.rating}</p>
+                <button onClick={()=> {this.props.showClicked('the new show from our child component')}}>
+                the new show from our child component
                 </button>
             </div>
         )
