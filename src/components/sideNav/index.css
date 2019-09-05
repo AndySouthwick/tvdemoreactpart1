@@ -1,4 +1,15 @@
 .side-nav{
-    width: 280px;
+    min-width: 100px;
     border-right: solid #353535;
+}
+.container{
+    display: flex;
+}
+.container div input{
+    display: block;
+}
+@media(max-width: 900px){
+    div.side-nav{
+        width: 200; 
+    }
 }

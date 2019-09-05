@@ -12,7 +12,7 @@ class SideNav extends Component{
     }
 
     render(){
-        console.log(this.props.show)
+        console.log(this.props.name)
         return(
             <div className="side-nav">
                 <div>
@@ -21,9 +21,9 @@ class SideNav extends Component{
 
                 </div>
                 
-                <p>{this.props.show.rating}</p>
-                <button onClick={()=> {this.props.showClicked('the new show from our child component')}}>
-                the new show from our child component
+                <p>{this.props.show}</p>
+                <button onClick={()=> {this.props.showClicked(this.props.name)}}>
+                {this.props.name}
                 </button>
             </div>
         )

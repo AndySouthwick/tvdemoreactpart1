@@ -1,20 +1,34 @@
 import React, {Component} from 'react'
 import SideNav from '../../components/sideNav'
 import PropTypes from 'prop-types'
+import './index.css'
 class ManagePage extends Component {
     state = {
-      show: {
-          name: 'chuck'
-      }
+      nameInProgress: '',
+      ratingInProgress: '',
+      imgInProgress: '',
+      shows: [ {
+        name: 'bbt'
+    },
+    {
+        name: 'chuck'
     }
-    renderShow = (e) => {
-        this.setState({
-            show: {
-                name: e.target.value
-            }
-        })
+]
     }
+    renderShows = () => {
+        let shows = []
+        let i = 0
 
+        for(let show of this.state.shows){
+            shows.push(<SideNav showObject={show} name={show.name} showClicked={(e) => {
+                console.log(e)
+                // this.setState({
+                //     nameInProgress: 
+                // })
+            }}/>)
+        }
+        return shows
+    }
     createShow = (e) => {
         this.setState({
             show: {
@@ -33,7 +47,6 @@ class ManagePage extends Component {
             }
         })
     }
-
     updateStateOfShow = (show) => {
         this.setState({
             show: {
@@ -58,12 +71,18 @@ class ManagePage extends Component {
         console.log(this.state)
         return(
            
-            <div>
-                {this.state.name}
-                <SideNav show={this.state.show} allowDelete={true} showClicked={this.updateStateOfShow}/>
-                <input type="text" value={this.state.show.name} onChange={(e)=> {this.createShow(e)}} placeholder="Show Name"/>
-                <input type="text"  value={this.state.show.rating} onChange={(e)=> {this.createRatingForShow(e)}} placeholder="show rating"/>
-                <input type="text"  value={this.state.show.img} onChange={(e)=> {this.createImgUrl(e)}} placeholder="image url"/>
+            <div className="container">
+                <div>
+                {this.renderShows()}
+                </div>
+                <div>
+            
+                    <input type="text" value={this.state.nameInProgress} onChange={(e)=> {this.createShow(e)}} placeholder="Show Name"/>
+                    <input type="text"  value={this.state.ratingInProgress} onChange={(e)=> {this.createRatingForShow(e)}} placeholder="show rating"/>
+                    <input type="text"  value={this.state.imgInProgress} onChange={(e)=> {this.createImgUrl(e)}} placeholder="image url"/>
+                    <button>Create/Update Show</button>
+                    
+                </div>
             </div>
         )
     }
