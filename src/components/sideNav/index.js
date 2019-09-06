@@ -22,7 +22,7 @@ class SideNav extends Component{
                 </div>
                 
                 <p>{this.props.show}</p>
-                <button onClick={()=> {this.props.showClicked(this.props.name)}}>
+                <button onClick={this.props.showClicked}>
                 {this.props.name}
                 </button>
             </div>
