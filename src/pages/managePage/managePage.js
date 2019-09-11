@@ -4,37 +4,23 @@ import PropTypes from 'prop-types'
 import './index.css'
 class ManagePage extends Component {
     state = {
-    tvShow: {
       nameInProgress: '',
       ratingInProgress: '',
-      imgInProgress: '',
-    },
-      shows: []
+      imgInProgress: ''
     }
     renderShows = () => {
-        return this.state.shows.map((a, i) => {
-            return <SideNav key={i} name={a.name}/>
+        return this.props.tvShows.map((show, i) => {
+            return <SideNav key={i} name={show.name}/>
         })
-
-        // let shows = []
-        // let i = 0
-
-        // for(let show of this.state.shows){
-        //     shows.push(<SideNav  name={show.name} showClicked={(e) => {
-        //     }}/>)
-        // }
-        // return shows
     }
     update = (tvShow) => {
-        this.setState((prevState) => ({
-            tvShow,
-            shows: [...prevState.shows, tvShow]
+        this.props.saveTvShow(tvShow)
+        this.setState({
+            nameInProgress: '',
+            ratingInProgress: '',
+            imgInProgress: ''
         })
-        )
     }
-    // deleteClicked = (name) => {
-    //     console.log('test', name)
-    // }
 
     render(){
         console.log(this.state)
@@ -48,34 +34,27 @@ class ManagePage extends Component {
             
                     <input type="text" value={this.state.nameInProgress} onChange={(e)=> {
                         this.setState({
-                            tvShow: {
                                 nameInProgress: e.target.value,
-                                ratingInProgress: this.state.tvShow.ratingInProgress,
-                                imgInProgress: this.state.tvShow.imgInProgress
-                            }
                         })
                     }} placeholder="Show Name"/>
 
                     <input type="text"  value={this.state.ratingInProgress} onChange={(e)=> {
+                        
                          this.setState({
-                            tvShow: {
                                 ratingInProgress: e.target.value,
-                                nameInProgress: this.state.tvShow.nameInProgress,
-                                imgInProgress: this.state.tvShow.imgInProgress
-                            }
                         })
                     }} placeholder="show rating"/>
                     
                     <input type="text"  value={this.state.imgInProgress} onChange={(e)=> {
                          this.setState({
-                            tvShow: {
-                                imgInProgress: e.target.value,
-                                nameInProgress: this.state.tvShow.nameInProgress,
-                                ratingInProgress: this.state.tvShow.ratingInProgress,
-                            }
+                            imgInProgress: e.target.value
                         })
-                    }} placeholder="image url"/>
-                    <button onClick={() => {this.update(this.state.tvShow)}}>Create/Update Show</button>
+                    }} placeholder="image url"/> 
+                    <button onClick={() => {this.update({
+                        name: this.state.nameInProgress,
+                        img: this.state.imgInProgress,
+                        rating: this.state.ratingInProgress
+                    })}}>Create/Update Show</button>
                     
                 </div>
             </div>
