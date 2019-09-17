@@ -4,6 +4,7 @@ import ManagePage from './pages/managePage/managePage'
 import PreviewPage from './pages/previewPage/previewPage'
 import Navigation from './components/navigation/'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
+import CreateList from './pages/mapandspread'
 class App extends Component {
   state = {
     tvShows: []
@@ -23,9 +24,19 @@ class App extends Component {
   // }
 
   saveTVShow = (showToSave) => {
-      this.setState((prevState) => ({
-        tvShows: [...prevState.tvShows, showToSave]
-      }))
+    console.log(showToSave)
+        fetch('http://localhost:3001', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body : JSON.stringify(showToSave),
+        }).then(response => {
+          return response.json()
+        }).then((res) => {
+          console.log(res)
+        })
+      // this.setState((prevState) => ({
+      //   tvShows: [...prevState.tvShows, showToSave]
+      // }))
   }
 
   renderManagePage = () => <ManagePage saveTvShow={this.saveTVShow} tvShows={this.state.tvShows}/>
@@ -38,6 +49,7 @@ class App extends Component {
       <Navigation/>
       <Route exact path="/" component={this.renderManagePage} />
       <Route path="/preview-page" component={PreviewPage} />
+      <Route path="/list" component={CreateList} />
       </div>
     </div>
     </Router>
