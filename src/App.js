@@ -9,6 +9,15 @@ class App extends Component {
   state = {
     tvShows: []
   }
+  componentDidMount() {
+    fetch('http://localhost:3001')
+    .then(res => res.json())
+    .then(tvShows => {
+      this.setState({
+        tvShows
+      })
+    })
+  }
 
   // saveTVShow = (showToSave) => {
   //   console.log(showToSave)
@@ -27,13 +36,17 @@ class App extends Component {
     console.log(showToSave)
         fetch('http://localhost:3001', {
           method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body : JSON.stringify(showToSave),
-        }).then(response => {
-          return response.json()
-        }).then((res) => {
-          console.log(res)
-        })
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(showToSave)
+        }).then(response => response.json())
+          .then(data => {
+            this.setState({
+              tvShows: data
+            })
+          })
+
       // this.setState((prevState) => ({
       //   tvShows: [...prevState.tvShows, showToSave]
       // }))
