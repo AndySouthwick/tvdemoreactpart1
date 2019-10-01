@@ -5,51 +5,47 @@ import PreviewPage from './pages/previewPage/previewPage'
 import Navigation from './components/navigation/'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import CreateList from './pages/mapandspread'
+import { useQuery } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
+
 class App extends Component {
   state = {
     tvShows: []
   }
+
   componentDidMount() {
-    fetch('http://localhost:3001')
-    .then(res => res.json())
-    .then(tvShows => {
-      this.setState({
-        tvShows
-      })
-    })
+      this.renderTvShows()
+
   }
-
-  // saveTVShow = (showToSave) => {
-  //   console.log(showToSave)
-  //   this.setState(
-  //     (prevState) => ({
-  //       tvShows: [...prevState.tvShows, {
-  //         name: showToSave.name,
-  //         rating: showToSave.rating,
-  //         imageUrl: showToSave.imageUrl
-  //       }]
-  //     })
-  //   )
-  // }
-
-  saveTVShow = (showToSave) => {
-    console.log(showToSave)
-        fetch('http://localhost:3001', {
+  TvShows
+  renderTvShows = async () => {
+ 
+    // try{
+    //   console.log('this ran')
+    //   const promise = await fetch('http://localhost:3001/getAllTvShows')
+    //   this.setState({
+    //     tvShows: await promise.json()
+    //   })
+    // } catch(err){
+    //   console.log(err)
+    // }
+  }
+  
+  saveTVShow = async (showToSave) => {
+    try{
+       const apiCall = await fetch('http://localhost:3001/tvDemo', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(showToSave)
-        }).then(response => response.json())
-          .then(data => {
-            this.setState({
-              tvShows: data
-            })
-          })
-
-      // this.setState((prevState) => ({
-      //   tvShows: [...prevState.tvShows, showToSave]
-      // }))
+        })
+        // console.log(apiCall)
+         await apiCall
+         await this.renderTvShows()
+      } catch(e){
+        console.log(e)
+      }
   }
 
   renderManagePage = () => <ManagePage saveTvShow={this.saveTVShow} tvShows={this.state.tvShows}/>
