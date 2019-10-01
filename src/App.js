@@ -14,7 +14,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-      this.renderTvShows()
+      this.renderTvShows()  //will this be a conflict
+     
 
   }
   TvShows
