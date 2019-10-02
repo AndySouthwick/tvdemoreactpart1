@@ -5,8 +5,12 @@ import PreviewPage from './pages/previewPage/previewPage'
 import Navigation from './components/navigation/'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import CreateList from './pages/mapandspread'
-import { useQuery } from '@apollo/react-hooks';
+import { Query } from 'react-apollo';
 import { gql } from 'apollo-boost';
+
+
+
+
 
 class App extends Component {
   state = {
@@ -14,23 +18,21 @@ class App extends Component {
   }
 
   componentDidMount() {
-      this.renderTvShows()  //will this be a conflict
-     
+    
+  }
 
-  }
-  TvShows
-  renderTvShows = async () => {
- 
-    // try{
-    //   console.log('this ran')
-    //   const promise = await fetch('http://localhost:3001/getAllTvShows')
-    //   this.setState({
-    //     tvShows: await promise.json()
-    //   })
-    // } catch(err){
-    //   console.log(err)
-    // }
-  }
+  // renderTvShows = () => {
+  //   return <Query query={TV_SHOWS}>
+  //    {({ loading, error, data }) => {
+  //       if (loading) return 'Loading...';
+  //       if (error) return `Error! ${error.message}`;
+  //       console.log(data)
+  //      cache.writeData({
+  //        tvShows: data.allTvShowses
+  //      })
+  //   }}
+  //   </Query>
+  // }
   
   saveTVShow = async (showToSave) => {
     try{
@@ -51,7 +53,7 @@ class App extends Component {
 
   renderManagePage = () => <ManagePage saveTvShow={this.saveTVShow} tvShows={this.state.tvShows}/>
   render(){
-    console.log(this.state)
+    console.log(this.renderTvShows)
   return (
     <Router>
     <div className="App">
